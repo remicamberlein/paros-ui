@@ -1,0 +1,28 @@
+
+<fieldset >
+  <legend>Traitement</legend>
+  <label for="trt_name"> nom : 
+    <input [(ngModel)]='nom' placeholder="nom du traitement" required/></label><br/>
+  <label for="trt_desc"> description : 
+    <input [(ngModel)]='desc' placeholder="description du traitement" required/></label><br/>
+  <label for="trt_type"> type de traitement : </label>
+  <!-- <select name="type" id="trt_type"  value="{{new_trt.type}}">
+     <option value="1">enregistrement</option>
+     <option value="2">modification</option>
+     <option value="3">suppression</option>
+   </select>
+  <label for="trt_name"> date de création : </label><input id="trt_name" type="text" value="01/02/2020"/> -->
+</fieldset>
+
+<br><br><br>
+
+<div>
+ <!-- <label> nom :
+   <input [(ngModel)]='newTraitement' placeholder="nom du traitement" required/>
+ </label> -->
+&nbsp;&nbsp;<button (click)="save()">enregistrer</button>
+</div>
+
+<li *ngFor="let trt of list_trt">
+<span>nom : {{trt.nom}}, desc : {{trt.desc}}</span>
+</li>
