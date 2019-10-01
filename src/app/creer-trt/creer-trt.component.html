@@ -1,26 +1,68 @@
 
 <fieldset >
   <legend>Traitement</legend>
-  <label for="trt_name"> nom : 
-    <input [(ngModel)]='nom' placeholder="nom du traitement" required/></label><br/>
-  <label for="trt_desc"> description : 
-    <input [(ngModel)]='desc' placeholder="description du traitement" required/></label><br/>
-  <label for="trt_type"> type de traitement : </label>
-  <!-- <select name="type" id="trt_type"  value="{{new_trt.type}}">
-     <option value="1">enregistrement</option>
-     <option value="2">modification</option>
-     <option value="3">suppression</option>
-   </select>
-  <label for="trt_name"> date de création : </label><input id="trt_name" type="text" value="01/02/2020"/> -->
+  <table>
+    <col width="150">
+    <col width="200">
+    <tr>
+      <td><label for="trt_name"> nom : </label></td>
+      <td><input id="trt_name" [(ngModel)]='nom' placeholder="nom du traitement" type="text" width="200"/></td>
+    </tr>
+    <tr>
+      <td><label for="trt_desc"> description : </label></td>
+      <td><textarea [(ngModel)]='desc' placeholder="description du traitement" width="200"></textarea></td>
+    </tr>
+    <tr>
+      <td><label for="trt_date"> date de création : </label></td>
+      <td><input [(ngModel)]='dateCreation' type="date" width="200" /></td>
+    </tr>
+    <tr>
+      <td><label for="trt_type"> type de traitement :</label></td>
+      <td> <input [(ngModel)]='type_text' placeholder="type de traitement" width="200"/></td>
+    </tr>
+    <tr>
+      <td><label for="trt_data"> données concernées : </label></td>
+      <td><textarea [(ngModel)]='data' placeholder="liste des données" width="200"></textarea></td>
+    </tr>
+    <tr>
+      <td><label for="trt_resp_trt"> responsable du traitement : </label></td>
+      <td><input [(ngModel)]='resp_trt' placeholder="responsable du traitement" width="200"/></td>
+    </tr>
+    <tr>
+      <td><label for="trt_resp_service"> responsable du service : </label></td>
+      <td><input [(ngModel)]='resp_service' placeholder="responsable du service" width="200"/></td>
+    </tr>
+    <tr>
+      <td><label for="trt_dpo"> DPO : </label></td>
+      <td><input [(ngModel)]='dpo' placeholder="nom du DPO" width="200"/></td>
+    </tr>
+    <tr>
+      <td><label for="trt_finalites"> finalités : </label></td>
+      <td><textarea [(ngModel)]='finalites' placeholder="liste des finalités" width="200"></textarea></td>
+    </tr>
+    <tr>
+      <td><label for="trt_acteurs"> Type d'acteurs concernés : </label></td>
+      <td><textarea [(ngModel)]='acteurs' placeholder="type d'acteurs" width="200"></textarea></td>
+    </tr>
+    <tr>
+      <td><label for="trt_securite"> Mesures de sécurité : </label></td>
+      <td><textarea [(ngModel)]='securite' placeholder="Mesures de sécurité" width="200"></textarea></td>
+    </tr>
+    <tr>
+      <td><label for="trt_hebergement"> Localisation et type d’hébergement des données : </label></td>
+      <td><textarea [(ngModel)]='hebergement' placeholder="détail hébergement" width="200"></textarea></td>
+    </tr>
+    <tr>
+      <td><label for="trt_hors_ue"> Action hors UE ? : </label></td>
+      <td><input [(ngModel)]='hors_ue' type="checkbox"/></td>
+    </tr>
+  </table>
 </fieldset>
 
 <br><br><br>
 
 <div>
- <!-- <label> nom :
-   <input [(ngModel)]='newTraitement' placeholder="nom du traitement" required/>
- </label> -->
-&nbsp;&nbsp;<button (click)="save()">enregistrer</button>
+&nbsp;&nbsp;<button (click)="save()">Soumettre ce traitement</button>
 </div>
 
 <li *ngFor="let trt of list_trt">
