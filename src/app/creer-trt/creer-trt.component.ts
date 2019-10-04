@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Traitement } from '../traitement-item';
-/*import { DatePipe } from '@angular/common';*/
+import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
+import { CommentItem } from '../comment-item';
 
 @Component({
   selector: 'app-creer-trt',
@@ -27,15 +30,38 @@ export class CreerTrtComponent implements OnInit {
 	hebergement: string;
 	hors_ue: boolean;
 
+	retourBack: string;
+	apiURL = 'http://localhost:3000';
+	items : CommentItem[];
+
+	// Http Options
+	httpOptions = {
+		headers: new HttpHeaders({'Content-Type': 'application/json'})
+	  };  
+
+	// Error handling 
+  	handleError(error) {
+		let errorMessage = '';
+		if(error.error instanceof ErrorEvent) {
+		// Get client-side error
+		errorMessage = error.error.message;
+		} else {
+		// Get server-side error
+		errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+		}
+		window.alert(errorMessage);
+		return throwError(errorMessage);
+ 	}
+
   list_trt : Traitement[] = [
   
     /*{nom: 'test', desc: '', type: 1, dateCreation: new Date(), dateModif: null, dateSuppr: null},
     {nom: 'test2', desc: '', type: 1, dateCreation: new Date(), dateModif: null, dateSuppr: null}*/
   ];
 
-  constructor() {
-  	/*this.new_trt.dateCreation = new Date();*/
-   }
+  constructor(private http:HttpClient) {
+
+	}
 
   ngOnInit() {
   }
@@ -77,5 +103,23 @@ export class CreerTrtComponent implements OnInit {
 
 	    this.list_trt.push(trt);
   	}
+  }
+
+  getcomments(): Observable<CommentItem[]> {
+    return this.http.get<CommentItem[]>(this.apiURL + '/comments')
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
+  ping() {
+	
+	//let reponse: Observable<string>;
+	//this.retourBack = 
+	//reponse = this.http.get('http://localhost:3000/ping', httpOptions);
+	
+	this.getcomments().subscribe(items => this.items = items);
+	
   }
 }
